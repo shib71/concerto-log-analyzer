@@ -11,6 +11,7 @@ import { DetailSQL } from './DetailSQL';
 import { DetailObjectDump } from './DetailObjectDump';
 import { TfiSplitV } from 'react-icons/tfi';
 import { getLogItemIDString } from '../../logs/lib';
+import "./LogRow.css"
 
 interface LogRowOptions {
     className?: string
@@ -60,7 +61,7 @@ export const LogRow = ({
             {item.timestamp.toLocaleString()}
         </Table.Td>
         <Table.Td style={{ verticalAlign: "top" }}>
-            <Pill style={{ backgroundColor: getSessionColour(item.sessionHash) }}>{item.sessionHash}:{item.line}</Pill>
+            <Pill className="logrow-sessionhash" style={{ backgroundColor: getSessionColour(item.sessionHash) }}>{item.sessionHash}:{item.line}</Pill>
         </Table.Td>
         <Table.Td>
             {item.comment && <Alert variant="light" color="blue" radius={0} style={{ position: "relative", top: -10 }}>
