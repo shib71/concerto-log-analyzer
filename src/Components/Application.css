@@ -1,0 +1,8 @@
+.fullscreen-template {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: #333;
+    background-color: #f0f0f0;
+}
