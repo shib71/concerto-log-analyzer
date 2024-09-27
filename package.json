@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "publish": "git subtree push --prefix dist origin gh-pages"
+    "gitpages": "git subtree push --prefix dist origin gh-pages"
   },
   "dependencies": {
     "@mantine/code-highlight": "^7.12.2",
