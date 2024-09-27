@@ -4,34 +4,35 @@ import { LogBucket } from "../../logs/types"
 import { goToID } from "../../lib/util"
 import { getLogItemIDString } from "../../logs/lib"
 
+const barStyle = {
+    height: "100%",
+    display: "inline-block",
+} as React.CSSProperties
+
 interface TimeseriesBarOptions {
     maxFrequency: number
     lineHeight: number
     bucket: LogBucket
+    getSessionColour: (session: string) => string
 }
 
-const TimeseriesBar = ({ maxFrequency, lineHeight, bucket }: TimeseriesBarOptions) => {
+const TimeseriesBar = ({ maxFrequency, lineHeight, bucket, getSessionColour }: TimeseriesBarOptions) => {
     return <div onClick={() => goToID(getLogItemIDString(bucket.id))} style={{ minHeight: `${lineHeight}%`, cursor: "pointer" }} title={`${bucket.timestamp.toLocaleString()}: ${bucket.total}`}>
         {Object.keys(bucket.count).map((key) => <div
             key={key}
-            style={{ ...barStyle, width: (bucket.count[key] / maxFrequency * 100).toFixed(3) + "%" }}
+            style={{ ...barStyle, backgroundColor: getSessionColour(key), width: (bucket.count[key] / maxFrequency * 100).toFixed(3) + "%" }}
         ></div>)}
     </div>
 }
 
 
 interface TimeseriesOptions {
+    getSessionColour: (session: string) => string
     className?: string
     style?: React.CSSProperties
 }
 
-const barStyle = {
-    backgroundColor: "#666",
-    height: "100%",
-    display: "inline-block",
-} as React.CSSProperties
-
-export const Timeseries = ({ className, style }: TimeseriesOptions) => {
+export const Timeseries = ({ getSessionColour, className, style }: TimeseriesOptions) => {
     const log = useLog()
     if (log.maxFrequency === 0) return null
 
@@ -43,6 +44,7 @@ export const Timeseries = ({ className, style }: TimeseriesOptions) => {
             maxFrequency={log.maxFrequency}
             lineHeight={lineHeight}
             bucket={bucket}
+            getSessionColour={getSessionColour}
         />)}
     </Stack>
 }

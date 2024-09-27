@@ -4,9 +4,12 @@ import { LogTable } from './Log/LogTable';
 import { Timeseries } from './Log/Timeseries';
 import { useProcessing } from '../state/useAnalyzerState';
 import "@mantine/core/styles.css"
+import { useColour } from '../hooks/useColour';
 
 export const Application = () => {
   const processing = useProcessing()
+  const getSessionColour = useColour()
+
   return <MantineProvider>
     <TypographyStylesProvider>
       <LoadingOverlay visible={processing} zIndex={100000} />
@@ -15,11 +18,11 @@ export const Application = () => {
 
         <AppShell.Main>
           <Box style={{ width: "calc(100vw - 632px)" }}>
-            <LogTable style={{ width: "100%" }} />
+            <LogTable getSessionColour={getSessionColour} style={{ width: "100%" }} />
           </Box>
         </AppShell.Main>
         <AppShell.Aside p="md" h="calc(100vh - 50px)">
-          <Timeseries />
+          <Timeseries getSessionColour={getSessionColour} />
         </AppShell.Aside>
       </AppShell>
     </TypographyStylesProvider>

@@ -1,4 +1,4 @@
-import { ActionIcon, Alert, Button, CheckIcon, Group, Popover, Table, Textarea } from '@mantine/core';
+import { ActionIcon, Alert, Button, CheckIcon, Group, Pill, Popover, Table, Textarea } from '@mantine/core';
 import { LogItem } from '../../logs/types';
 import React, { useState } from 'react';
 import { BsBookmarkFill, BsX } from 'react-icons/bs';
@@ -18,11 +18,13 @@ interface LogRowOptions {
     item: LogItem
     addComment?: AnalyzerState["addComment"]
     splitLogItem?: AnalyzerState["splitLogItem"]
+    getSessionColour: (session: string) => string
 }
 
 export const LogRow = ({
     className, style,
-    item, addComment, splitLogItem
+    item, addComment, splitLogItem,
+    getSessionColour
 }: LogRowOptions) => {
     const [comment, setComment] = useInputState(item.comment || "")
     const [commentOpened, setCommentOpened] = useState(false);
@@ -58,7 +60,7 @@ export const LogRow = ({
             {item.timestamp.toLocaleString()}
         </Table.Td>
         <Table.Td style={{ verticalAlign: "top" }}>
-            {item.sessionHash}:{item.line}
+            <Pill style={{ backgroundColor: getSessionColour(item.sessionHash) }}>{item.sessionHash}:{item.line}</Pill>
         </Table.Td>
         <Table.Td>
             {item.comment && <Alert variant="light" color="blue" radius={0} style={{ position: "relative", top: -10 }}>

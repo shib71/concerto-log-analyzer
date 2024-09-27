@@ -8,9 +8,10 @@ interface LogBucketSectionOptions {
     bucket: LogBucket
     addComment: AnalyzerState["addComment"]
     splitLogItem: AnalyzerState["splitLogItem"]
+    getSessionColour: (session: string) => string
 }
 
-const LogBucketSection = ({ bucket, addComment, splitLogItem }: LogBucketSectionOptions) => {
+const LogBucketSection = ({ bucket, addComment, splitLogItem, getSessionColour }: LogBucketSectionOptions) => {
     return <>
         {bucket.logs.map((logItem, index) => {
             return <LogRow
@@ -18,6 +19,7 @@ const LogBucketSection = ({ bucket, addComment, splitLogItem }: LogBucketSection
                 item={logItem}
                 addComment={addComment}
                 splitLogItem={splitLogItem}
+                getSessionColour={getSessionColour}
             />
         })}
     </>
@@ -25,11 +27,12 @@ const LogBucketSection = ({ bucket, addComment, splitLogItem }: LogBucketSection
 
 
 interface LogTableOptions {
+    getSessionColour: (session: string) => string
     className?: string
     style?: React.CSSProperties
 }
 
-export const LogTable = ({ className, style }: LogTableOptions) => {
+export const LogTable = ({ getSessionColour, className, style }: LogTableOptions) => {
     const log = useLog()
     const splitLogItem = useAnalyzerState(state => state.splitLogItem)
     const addComment = useAnalyzerState(state => state.addComment)
@@ -44,7 +47,7 @@ export const LogTable = ({ className, style }: LogTableOptions) => {
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>
-        {log.buckets.map((bucket, index) => <LogBucketSection key={index} bucket={bucket} addComment={addComment} splitLogItem={splitLogItem} />)}
+        {log.buckets.map((bucket, index) => <LogBucketSection key={index} bucket={bucket} addComment={addComment} splitLogItem={splitLogItem} getSessionColour={getSessionColour} />)}
       </Table.Tbody>
     </Table>
 }
