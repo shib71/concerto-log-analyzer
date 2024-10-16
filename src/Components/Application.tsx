@@ -21,7 +21,7 @@ export const Application = () => {
             <LogTable getSessionColour={getSessionColour} style={{ width: "100%" }} />
           </Box>
         </AppShell.Main>
-        <AppShell.Aside p="md" h="calc(100vh - 50px)">
+        <AppShell.Aside p="md" h="100vh">
           <Timeseries getSessionColour={getSessionColour} />
         </AppShell.Aside>
       </AppShell>

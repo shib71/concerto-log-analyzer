@@ -31,9 +31,9 @@ export const asSessionID = (id: string): SessionID => {
 }
 
 export const asSessionHash = (id: string): SessionHash => {
-    if (!id.match(/^[a-z\d]{40}$/)) {
-        throw new Error(`Invalid Session Hash. Expected 40 alphanumeric characters. [${id}]`)
-    }
+    //if (!id.match(/^[a-z\d]{40}$/)) {
+    //    throw new Error(`Invalid Session Hash. Expected 40 alphanumeric characters. [${id}]`)
+    //}
 
     return id as SessionHash
 }

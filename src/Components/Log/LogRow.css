@@ -1,4 +1,18 @@
+.logrow-row-actions {
+    vertical-align: top;
+    width: 100px;
+}
+
+.logrow-row-sessionhash {
+    max-width: 120px;
+    vertical-align: top;
+}
+
 .logrow-sessionhash {
     color: #FFF !important;
     font-weight: bold;
+}
+
+.logrow-row-content {
+    max-width: calc(100vw - 1320px);
 }

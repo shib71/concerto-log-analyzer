@@ -4,6 +4,7 @@ import { AppShell, Space } from "@mantine/core";
 import { NewLog } from "./NewLog";
 import { Bookmarks } from "./Bookmarks";
 import { Export } from "./Export";
+import { NewLogPaste } from "./NewLogPaste";
 
 export const Toolbar = () => {
     return <AppShell.Navbar p="md">
@@ -12,6 +13,8 @@ export const Toolbar = () => {
         <NominationID />
         <Space h="sm" />
         <NewLog />
+        <Space h="sm" />
+        <NewLogPaste />
         <Space h="sm" />
         <Bookmarks />
         <Space h="sm" />

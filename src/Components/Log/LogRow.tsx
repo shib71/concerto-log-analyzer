@@ -38,10 +38,10 @@ export const LogRow = ({
     }
 
     return <Table.Tr className={className} style={style}>
-        <Table.Td id={getLogItemIDString(item.id)} style={{ verticalAlign: "top", width: "100px" }}>
+        <Table.Td className="logrow-row-actions" id={getLogItemIDString(item.id)}>
             {addComment && <Popover opened={commentOpened} width={500} position="bottom" withArrow shadow="md">
                 <Popover.Target>
-                    <Button variant="subtle" color={item.comment ? "blue" : "grey"} onClick={() => setCommentOpened(!commentOpened)}><BsBookmarkFill /></Button>
+                    <Button variant="subtle" px="xs" color={item.comment ? "blue" : "grey"} onClick={() => setCommentOpened(!commentOpened)}><BsBookmarkFill /></Button>
                 </Popover.Target>
                 <Popover.Dropdown>
                     <Group>
@@ -55,15 +55,15 @@ export const LogRow = ({
                     </Group>
                 </Popover.Dropdown>
             </Popover>}
-            {item.type === "string" && splitLogItem && <Button variant="subtle" color={splitting ? "red" : "grey"} onClick={() => setSplitting(!splitting)}><TfiSplitV /></Button>}
+            {item.type === "string" && splitLogItem && <Button px="xs" variant="subtle" color={splitting ? "red" : "grey"} onClick={() => setSplitting(!splitting)}><TfiSplitV /></Button>}
         </Table.Td>
-        <Table.Td style={{ verticalAlign: "top" }}>
-            {item.timestamp.toLocaleString()}
+        <Table.Td style={{ verticalAlign: "top" }} title={item.timestamp.toLocaleString()}>
+            {item.timestamp.toLocaleString().split(", ").pop()}
         </Table.Td>
-        <Table.Td style={{ verticalAlign: "top" }}>
-            <Pill className="logrow-sessionhash" style={{ backgroundColor: getSessionColour(item.sessionHash) }}>{item.sessionHash}:{item.line}</Pill>
+        <Table.Td className="logrow-row-sessionhash">
+            <Pill className="logrow-sessionhash" style={{ backgroundColor: getSessionColour(item.sessionHash) }} title={`${item.sessionHash}:${item.line}`}>{item.sessionHash.slice(0, 8)}:{item.line}</Pill>
         </Table.Td>
-        <Table.Td>
+        <Table.Td className="logrow-row-content">
             {item.comment && <Alert variant="light" color="blue" radius={0} style={{ position: "relative", top: -10 }}>
                 <BiSolidComment style={{ color: "var(--mantine-color-blue-filled)" }} />
                 &nbsp;
